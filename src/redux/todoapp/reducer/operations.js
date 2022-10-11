@@ -16,30 +16,27 @@ export const operationsReducer = (state=initialState, action ) => {
         case REMOVE_TODO:
             const filteredTodos = state.filter((todo) => todo.id !== action.payload )
             return filteredTodos;
-
+            
         case UPDATE_TODO:
               const data = action.payload;
-              const updatedArray = [];
-              state.map((item) =>{
+              const updatedArray =   state.map((item) =>{
                 if(item.id === data.id){
                     item.id = data.id;
                     item.todo = data.todo;
                     item.completed = data.completed;
                 }
-                updatedArray.push(item);
+                return item;
               })
               return updatedArray;
 
         case UPDATE_CHECKBOX:
-            const todoArray = [];
-            state.map((item) => {
+            const todoArray = state.map((item) => {
                 if(item.id === action.payload) {
                     item.completed = !item.completed;
                 }
-                todoArray.push(item);
+                return item;
             }) 
             return todoArray;  
-            
         default: return state;
     }
 }
